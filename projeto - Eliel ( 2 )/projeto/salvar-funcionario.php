@@ -35,7 +35,6 @@
                 print "<script> alert('Não foi editado'); </script>";
                 print "<script> location.href= '?page=listar-funcionario; </script>";
             }
-
             break;
 
         case 'excluir':
@@ -52,7 +51,6 @@
                 print "<script> location.href= '?page=listar-funcionario'; </script>";
             }
             break;
-
     }
 
 
