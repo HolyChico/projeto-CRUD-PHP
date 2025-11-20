@@ -38,10 +38,10 @@
 
             if($res == true){
                 print "<script> alert('Editado com sucesso!'); </script>";
-                print "<script> location.href= '?page=listar-clientes'; </script>";
+                print "<script> location.href='?page=listar-clientes'; </script>";
             } else {
                 print "<script> alert('Não foi editado'); </script>";
-                print "<script> location.href= '?page=listar-clientes'; </script>";
+                print "<script> location.href='?page=listar-clientes'; </script>";
             }
             break;
 
@@ -56,7 +56,7 @@
                 print "<script> location.href= '?page=listar-clientes'; </script>";
             } else{
                 print "<script> alert('Não foi excluído'); </script>";
-                print "<script> location.href= '?page=listar-clientes'; </script>";
+                print "<script> location.href='?page=listar-clientes'; </script>";
             }
             break;
     }

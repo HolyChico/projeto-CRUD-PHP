@@ -1,30 +1,51 @@
 <?php
     switch($_REQUEST["acao"]) {
         case 'cadastrar':
-            $nome = $_POST['nome_marcas'];
-            $email = $_POST['email_marcas'];
-            $telefone = $_POST['telefone_marcas'];
+            $nome = $_POST['nome_marca'];
 
-        $sql = "INSERT INTO marca (nome_marca, email_marca, telefone_marca)
-                VALUES('{$nome}', '{$email}', '{$telefone}') ";
-            
-        $res = $conn->query($sql);
+            $sql = "INSERT INTO marca (nome_marca) VALUES('{$nome}') ";
+                
+            $res = $conn->query($sql);
 
-        if($res == true){
-            print "<cript> alert('cadastrado com sucesso') </script>";
-            print "<script> location.href='?page+listar-marcas'; </script>";
-        }else{
-            print "<cript> alert('NÃO cadastrado') </script>";
-            print "<script> location.href='?page+listar-marcas'; </script>";
-        }
-        break;
+            if($res == true){
+                print "<script> alert('Cadastrado com sucesso') </script>";
+                print "<script> location.href='?page=listar-marcas'; </script>";
+            }else{
+                print "<script> alert('Não cadastrado') </script>";
+                print "<script> location.href='?page=listar-marcas'; </script>";
+            }
+            break;
 
         case 'editar':
-            //code
-        
-        case 'excluir':
-            //code
+            $nome = $_POST['nome_marca'];
 
+            $sql = "UPDATE marca SET nome_marca = '{$nome}' WHERE id_marca = " . $_REQUEST['id_marca'];
+
+            $res = $conn->query($sql);
+
+            if($res == true){
+                print "<script> alert('Editado com sucesso!'); </script>";
+                print "<script> location.href='?page=listar-marcas'; </script>";
+            } else {
+                print "<script> alert('Não foi editado'); </script>";
+                print "<script> location.href='?page=listar-marcas'; </script>";
+            }
+            break;
+
+        case 'excluir':
+            
+            $sql = "DELETE FROM marca WHERE id_marca=". $_REQUEST['id_marca'];
+
+            $res = $conn->query($sql);
+
+            if ($res == true){
+                print "<script> alert('Excluído com sucesso!'); </script>";
+                print "<script> location.href='?page=listar-marcas'; </script>";
+            } else{
+                print "<script> alert('Não foi excluído'); </script>";
+                print "<script> location.href='?page=listar-marcas'; </script>";
+            }
+            break;
     }
 
 

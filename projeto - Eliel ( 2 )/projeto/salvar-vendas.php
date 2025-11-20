@@ -12,10 +12,10 @@
 
         if($res == true){
             print "<cript> alert('cadastrado com sucesso') </script>";
-            print "<script> location.href='?page+listar-vendas'; </script>";
+            print "<script> location.href='?page=listar-vendas'; </script>";
         }else{
             print "<cript> alert('NÃO cadastrado') </script>";
-            print "<script> location.href='?page+listar-vendas'; </script>";
+            print "<script> location.href='?page=listar-vendas'; </script>";
         }
         break;
 

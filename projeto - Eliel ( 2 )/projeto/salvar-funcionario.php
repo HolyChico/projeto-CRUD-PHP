@@ -12,10 +12,10 @@
 
             if($res == true){
                 print "<script> alert('cadastrado com sucesso') </script>";
-                print "<script> location.href='?page+listar-funcionario'; </script>";
+                print "<script> location.href='?page=listar-funcionario'; </script>";
             }else{
                 print "<script> alert('NÃO cadastrado') </script>";
-                print "<script> location.href='?page+listar-funcionario'; </script>";
+                print "<script> location.href='?page=listar-funcionario'; </script>";
             }
             break;
 
@@ -30,10 +30,10 @@
 
             if($res == true){
                 print "<script> alert('Editado com sucesso!'); </script>";
-                print "<script> location.href= '?page=listar-funcionario; </script>";
+                print "<script> location.href='?page=listar-funcionario'; </script>";
             } else {
                 print "<script> alert('Não foi editado'); </script>";
-                print "<script> location.href= '?page=listar-funcionario; </script>";
+                print "<script> location.href='?page=listar-funcionario'; </script>";
             }
             break;
 
@@ -45,10 +45,10 @@
 
             if ($res == true){
                 print"<script> alert('Excluído com sucesso!'); </script>";
-                print "<script> location.href= '?page=listar-funcionario' </script>";
+                print "<script> location.href='?page=listar-funcionario'; </script>";
             } else{
                 print "<script> alert('Não foi excluído'); </script>";
-                print "<script> location.href= '?page=listar-funcionario'; </script>";
+                print "<script> location.href='?page=listar-funcionario'; </script>";
             }
             break;
     }
