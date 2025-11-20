@@ -6,12 +6,11 @@
         <label> Nome do Funcionário
             <input type="text" name="nome_funcionario" class="form-control" required>
         </label>
-
     </div>
 
     <div class="mb-3">
         <label> E-mail
-            <input type="text" name="email_funcionario" class="form-control" required>
+            <input type="email" name="email_funcionario" class="form-control" required>
         </label>
     </div>
 

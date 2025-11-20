@@ -1,5 +1,5 @@
 <?php
-    define("HOST", "localhost:3307"); //3307 é a porta do XAMPP, que estava dando erro na 3306 (nessa maquina)
+    define("HOST", "localhost"); //3307 é a porta do XAMPP, que estava dando erro na 3306 (nessa maquina)
     define("USER", "root");
     define("PASS", '');
     define("BASE", "concessionaria2122m");
