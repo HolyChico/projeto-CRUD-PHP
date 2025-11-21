@@ -1,5 +1,7 @@
 <h1> Editar Vendas </h1>
 
+<!-- id_venda	data_venda	valor_venda	cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelp  -->
+
 <?php
     $sql = "SELECT * FROM venda WHERE id_venda = ".$_REQUEST ['id_venda'];
 
