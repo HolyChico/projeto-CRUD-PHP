@@ -8,7 +8,7 @@
     $row = $res -> fetch_object();
 ?> 
 
-<form action="?page=salvar-modelo" method="POST">
+<form action="?page=salvar-modelos" method="POST">
     <input type="hidden" name="acao" value="editar">
     <input type="hidden" name="id_modelo" value="<?php print $row -> id_modelo ?>" >
 

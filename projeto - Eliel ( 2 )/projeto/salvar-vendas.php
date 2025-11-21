@@ -1,89 +1,63 @@
-<h1> Cadastrar Vendas </h1>
-<form action="?page=salvar-vendas" method="POST">
-    <input type="hidden" name="acao" value="cadastrar">
+<?php
 
-    <div class="mb-3">
-        <label> Data da Venda
-            <input type="date" name="data_venda" class="form-control" required>
-        </label>
+    // id_venda	data_venda	valor_venda	cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelo
 
-    </div>
+    switch($_REQUEST["acao"]) {
+        case 'cadastrar':
+            $data = $_POST['data_venda'];
+            $valor = $_POST['valor_venda'];
+            $cliente = $_POST['cliente_id_cliente'];
+            $funcionario = $_POST['funcionario_id_funcionario'];
+            $modelo = $_POST['modelo_id_modelo'];
 
-    <div class="mb-3">
-        <label> Valor da venda
-            <input type="number" name="email_venda" class="form-control" required> 
-        </label>
-    </div>
+            $sql = "INSERT INTO venda (data_venda, valor_venda, cliente_id_cliente, funcionario_id_funcionario, modelo_id_modelo)
+                    VALUES('{$data}', '{$valor}', '{$cliente}', '{$funcionario}', '{$modelo}') ";
+                
+            $res = $conn->query($sql);
 
+            if($res == true){
+                print "<script> alert('cadastrado com sucesso') </script>";
+                print "<script> location.href='?page=listar-vendas'; </script>";
+            }else{
+                print "<script> alert('NÃO cadastrado') </script>";
+                print "<script> location.href='?page=listar-vendas'; </script>";
+            }
+            break;  
 
-    <div class="mb-3">
-        <label> Cliente 
-            <select name="cliente_id_cliente" class="form-control" required>
-                <option> Escolha o cliente </option>
-                <?php
-                $sql = "SELECT * FROM cliente";
-                $res = $conn -> query($sql);
-                $qtd = $res -> num_rows;
-                if($qtd > 0){
-                    while($row = $res -> fetch_object()){
-                        print"<option value='{$row->id_cliente}'>{$row->nome_cliente}</option> ";
-                } }
-                else {
-                        print"<option> Não há clientes registrados </option>";
-                }
+        case 'editar':
+            $data = $_POST['data_venda'];
+            $valor = $_POST['valor_venda'];
+            $cliente = $_POST['cliente_id_cliente'];
+            $funcionario = $_POST['funcionario_id_funcionario'];
+            $modelo = $_POST['modelo_id_modelo'];
 
-                ?>
-            </select>
-        </label>
+            // ERRO AQUI: Falta o sinal de '=' antes de '{$cliente}'
+            $sql = "UPDATE venda SET data_venda='{$data}', valor_venda='{$valor}', cliente_id_cliente='{$cliente}', funcionario_id_funcionario='{$funcionario}', modelo_id_modelo='{$modelo}' WHERE id_venda=".$_REQUEST['id_venda'];
+            
+            $res = $conn->query($sql);
 
-    </div>
+            if($res==true){
+                print "<script>alert('Editou com sucesso!');</script>";
+                print "<script>location.href='?page=listar-vendas';</script>";
+            }else{
+                print "<script>alert('não editado');</script>";
+                print "<script>location.href='?page=listar-vendas';</script>";
+            }
+            break;
 
-    <div class="mb-3">
-        <label> Funcionário 
-            <select name="funcionario_id_funcionario" class="form-control" required>
-                <option> Escolha o funcionario </option>
-                <?php
-                $sql = "SELECT * FROM funcionario";
-                $res = $conn -> query($sql);
-                $qtd = $res -> num_rows;
-                if($qtd > 0){
-                    while($row = $res -> fetch_object()){
-                        print"<option value='{$row->id_funcionario}'>{$row->nome_funcionario}</option> ";
-                } }
-                else {
-                        print"<option> Não há funcionarios registradas </option>";
-                }
+        case 'excluir':
+            $sql = "DELETE FROM venda WHERE id_venda=".$_REQUEST['id_venda'];
 
-                ?>
-            </select>
-        </label>
+            $res = $conn ->query($sql);
 
-    </div>
+            if($res == true){
+                print "<script>alert('Excluiu com sucesso!');</script>";
+                print "<script>location.href='?page=listar-vendas';</script>";
+            }else{
+                print "<script>alert('Não excluiu');</script>";
+                print "<script>location.href='?page=listar-vendas';</script>";
+            }
+            break;
+    }
 
-    <div class="mb-3">
-        <label> Modelo do veículo 
-            <select name="modelo_id_modelo" class="form-control" required>
-                <option> Escolha o modelo </option>
-                <?php
-                $sql = "SELECT * FROM modelo";
-                $res = $conn -> query($sql);
-                $qtd = $res -> num_rows;
-                if($qtd > 0){
-                    while($row = $res -> fetch_object()){
-                        print"<option value='{$row->id_modelo}'>{$row->nome_modelo}</option> ";
-                } }
-                else {
-                        print"<option> Não há modelos registrados </option>";
-                }
-
-                ?>
-            </select>
-        </label>
-
-    </div>
-
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary"> Enviar </button>
-    </div>
-
-</form>
+?>

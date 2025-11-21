@@ -1,7 +1,8 @@
 <h1> Editar Vendas </h1>
 
 <?php
-    // WARNING AQUI: $_REQUEST['id_venda'] não está protegido
+    // ATENÇÃO: Esta estrutura não protege contra acesso direto e pode emitir Warnings.
+    // Confia que o ID da venda está sempre na URL.
     $sql = "SELECT * FROM venda WHERE id_venda = ".$_REQUEST ['id_venda'];
 
     $res = $conn -> query($sql);
@@ -15,13 +16,13 @@
 
     <div class="mb-3">
         <label> Data
-            <input type="date"  name="data_venda" class="form-control" value="<?php print $row -> data_venda; ?>">
+            <input type="date" name="data_venda" class="form-control" value="<?php print $row -> data_venda; ?>">
         </label>
     </div>
 
     <div class="mb-3">
         <label>Valor 
-            <input type="number" name="valor_venda" class="form-control" value="<?php print $row -> valor_venda; ?> "> 
+            <input type="number" step="0.01" name="valor_venda" class="form-control" value="<?php print $row -> valor_venda; ?>"> 
         </label>
     </div>
 
@@ -35,13 +36,16 @@
                     $qtd_1 = $res_1 -> num_rows;
                     if ($qtd_1 > 0){
                         while($row_1 = $res_1 -> fetch_object()){
-                            // LÓGICA INCORRETA: Tentando comparar FK com FK da mesma tabela
-                            if ($row -> cliente_id_cliente == $row_1 -> cliente_id_cliente){ 
-                                print "<option value='{$row_1 -> cliente_id_cliente}' selected> {$row_1 -> cliente_id_cliente} </option>";
+                            // CORREÇÃO 2: Compara FK da Venda (cliente_id_cliente) com PK da tabela Cliente (id_cliente).
+                            if ($row -> cliente_id_cliente == $row_1 -> id_cliente){ 
+                                // Imprime o nome do cliente, não o ID, na opção
+                                print "<option value='{$row_1 -> id_cliente}' selected> {$row_1 -> nome_cliente} </option>";
+                            } else {
+                                print "<option value='{$row_1 -> id_cliente}'> {$row_1 -> nome_cliente} </option>";
                             }
                         }
                     } else {
-                        print "<option> Não há cliente registradas </option>";
+                        print "<option> Não há clientes registradas </option>";
                     }
                 ?>
             </select>
@@ -58,13 +62,16 @@
                     $qtd_1 = $res_1 -> num_rows;
                     if ($qtd_1 > 0){
                         while($row_1 = $res_1 -> fetch_object()){
-                             // LÓGICA INCORRETA: Tentando comparar FK com FK da mesma tabela
-                            if ($row -> funcionario_id_funcionario == $row_1 -> funcionario_id_funcionario){ 
-                                print "<option value='{$row_1 -> funcionario_id_funcionario}' selected> {$row_1 -> funcionario_id_funcionario} </option>";
+                            // CORREÇÃO 2: Compara FK da Venda com PK da tabela Funcionário (id_funcionario).
+                            if ($row -> funcionario_id_funcionario == $row_1 -> id_funcionario){ 
+                                // Imprime o nome do funcionário, não o ID, na opção
+                                print "<option value='{$row_1 -> id_funcionario}' selected> {$row_1 -> nome_funcionario} </option>";
+                            } else {
+                                print "<option value='{$row_1 -> id_funcionario}'> {$row_1 -> nome_funcionario} </option>";
                             }
                         }
                     } else {
-                        print "<option> Não há funcionario registradas </option>";
+                        print "<option> Não há funcionário registradas </option>";
                     }
                 ?>
             </select>
@@ -81,9 +88,12 @@
                     $qtd_1 = $res_1 -> num_rows;
                     if ($qtd_1 > 0){
                         while($row_1 = $res_1 -> fetch_object()){
-                             // LÓGICA INCORRETA: Tentando comparar FK com FK da mesma tabela
-                            if ($row -> modelo_id_modelo == $row_1 -> modelo_id_modelo){ 
-                                print "<option value='{$row_1 -> modelo_id_modelo}' selected> {$row_1 -> modelo_id_modelo} </option>";
+                            // CORREÇÃO 2: Compara FK da Venda com PK da tabela Modelo (id_modelo).
+                            if ($row -> modelo_id_modelo == $row_1 -> id_modelo){ 
+                                // Imprime o nome do modelo, não o ID, na opção
+                                print "<option value='{$row_1 -> id_modelo}' selected> {$row_1 -> nome_modelo} </option>";
+                            } else {
+                                print "<option value='{$row_1 -> id_modelo}'> {$row_1 -> nome_modelo} </option>";
                             }
                         }
                     } else {
@@ -95,7 +105,7 @@
     </div>
 
     <div>
-        <button class="submit" class="btn btn-primary"> Enviar </button>
+        <button type="submit" class="btn btn-primary"> Enviar </button>
     </div> 
 
 </form>

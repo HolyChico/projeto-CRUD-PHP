@@ -11,7 +11,7 @@
 
     <div class="mb-3">
         <label> Valor da venda
-            <input type="number" name="email_venda" class="form-control" required> 
+            <input type="number" name="valor_venda" class="form-control" required> 
         </label>
     </div>
 
