@@ -13,20 +13,48 @@
     <input type="hidden" name="id_modelo" value="<?php print $row -> id_modelo ?>" >
 
     <div class="mb-3">
-        <label> Nome
-            <input type="text"  name="nome_modelo" class="form-control" value="<?php print $row -> nome_modelo; ?>">
+        <label> Marca
+            <select name="marca_id_marca" class="form-control" required>
+                <option> Escolha </option>
+                <?php
+                    $sql_1 = "SELECT * FROM marca";
+                    $res_1 = $conn -> query($sql_1);
+                    $qtd_1 = $res_1 -> num_rows;
+                    if ($qtd_1 > 0){
+                        while($row_1 = $res_1 -> fetch_object()){
+                            if ($row -> marca_id_marca == $row_1 -> id_marca){
+                                print "<option value='{$row_1 -> id_marca}' selected> {$row_1 -> nome_marca} </option>";
+                            }
+                        }
+                    } else {
+                        print "<option> Não há marcas registradas </option>";
+                    }
+                ?>
+            </select>
         </label>
     </div>
 
     <div class="mb-3">
-        <label>E-mail
-            <input type="email" name="email_modelo" class="form-control" value="<?php print $row -> email_modelo; ?> "> 
+        <label>Nome
+            <input type="text" name="nome_modelo" class="form-control" value="<?php print $row -> nome_modelo; ?> "> 
         </label>
     </div>
 
     <div class="mb-3"> 
-        <label> Telefone
-            <input type="number" name="telefone_modelo" class="form-control" value="<?php print $row -> telefone_modelo; ?>">
+        <label> Cor
+            <input type="text" name="cor_modelo" class="form-control" value="<?php print $row -> cor_modelo; ?>">
+        </label>
+    </div>
+
+    <div class="mb-3"> 
+        <label> Ano
+            <input type="number" name="ano_modelo" class="form-control" value="<?php print $row -> ano_modelo; ?>">
+        </label>
+    </div>
+
+    <div class="mb-3"> 
+        <label> Tipo
+            <input type="text" name="tipo_modelo" class="form-control" value="<?php print $row -> tipo_modelo; ?>">
         </label>
     </div>
 
