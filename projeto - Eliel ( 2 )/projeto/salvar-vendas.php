@@ -31,7 +31,7 @@
             $funcionario = $_POST['funcionario_id_funcionario'];
             $modelo = $_POST['modelo_id_modelo'];
 
-            $sql = "UPDATE venda SET data_venda='{$data}', valor_venda='{$valor}', cliente_id_cliente'{$cliente}', funcionario_id_funcionario='{$funcionario}', modelo_id_modelo='{$modelo}' WHERE id_modelo=".$_REQUEST['id_modelo'];
+            $sql = "UPDATE venda SET data_venda='{$data}', valor_venda='{$valor}', cliente_id_cliente'{$cliente}', funcionario_id_funcionario='{$funcionario}', modelo_id_modelo='{$modelo}' WHERE id_venda=".$_REQUEST['id_venda'];
             
             $res = $conn->query($sql);
 

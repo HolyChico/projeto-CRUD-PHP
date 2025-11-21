@@ -3,7 +3,7 @@
     <input type="hidden" name="acao" value="cadastrar">
 
     <!-- id_venda	data_venda	valor_venda
-    cliente_id_cliente  	funcionario_id_funcionario  	modelo_id_modelp  -->
+    cliente_id_cliente  	funcionario_id_funcionario  	modelo_id_modelp dasd a -->
 
     <div class="mb-3">
         <label> Data da Venda
@@ -33,7 +33,7 @@
                         print"<option value='{$row->id_cliente}'>{$row->nome_cliente}</option> ";
                 } }
                 else {
-                        print"<option> Não há marcas registradas </option>";
+                        print"<option> Não há clientes registrados </option>";
                 }
 
                 ?>
@@ -55,7 +55,7 @@
                         print"<option value='{$row->id_funcionario}'>{$row->nome_funcionario}</option> ";
                 } }
                 else {
-                        print"<option> Não há marcas registradas </option>";
+                        print"<option> Não há funcionarios registradas </option>";
                 }
 
                 ?>
@@ -77,7 +77,7 @@
                         print"<option value='{$row->id_modelo}'>{$row->nome_modelo}</option> ";
                 } }
                 else {
-                        print"<option> Não há marcas registradas </option>";
+                        print"<option> Não há modelos registrados </option>";
                 }
 
                 ?>

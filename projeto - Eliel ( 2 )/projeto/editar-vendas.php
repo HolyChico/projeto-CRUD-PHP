@@ -1,6 +1,6 @@
 <h1> Editar Vendas </h1>
 
-<!-- id_venda	data_venda	valor_venda	cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelp  -->
+<!-- id_venda	data_venda	valor_venda	//   cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelo -->
 
 <?php
     $sql = "SELECT * FROM venda WHERE id_venda = ".$_REQUEST ['id_venda'];
@@ -15,20 +15,80 @@
     <input type="hidden" name="id_venda" value="<?php print $row -> id_venda ?>" >
 
     <div class="mb-3">
-        <label> Nome
-            <input type="text"  name="nome_venda" class="form-control" value="<?php print $row -> nome_venda; ?>">
+        <label> Data
+            <input type="date"  name="data_venda" class="form-control" value="<?php print $row -> data_venda; ?>">
         </label>
     </div>
 
     <div class="mb-3">
-        <label>E-mail
-            <input type="email" name="email_venda" class="form-control" value="<?php print $row -> email_venda; ?> "> 
+        <label>Valor 
+            <input type="number" name="valor_venda" class="form-control" value="<?php print $row -> valor_venda; ?> "> 
         </label>
     </div>
 
     <div class="mb-3"> 
-        <label> Telefone
-            <input type="number" name="telefone_venda" class="form-control" value="<?php print $row -> telefone_venda; ?>">
+        <label> Cliente
+            <select name="cliente_id_cliente" class="form-control" required>
+                <option> Escolha </option>
+                <?php
+                    $sql_1 = "SELECT * FROM cliente";
+                    $res_1 = $conn -> query($sql_1);
+                    $qtd_1 = $res_1 -> num_rows;
+                    if ($qtd_1 > 0){
+                        while($row_1 = $res_1 -> fetch_object()){
+                            if ($row -> cliente_id_cliente == $row_1 -> cliente_id_cliente){
+                                print "<option value='{$row_1 -> cliente_id_cliente}' selected> {$row_1 -> cliente_id_cliente} </option>";
+                            }
+                        }
+                    } else {
+                        print "<option> Não há cliente registradas </option>";
+                    }
+                ?>
+            </select>
+        </label>
+    </div>
+
+    <div class="mb-3"> 
+        <label> Funcionário
+            <select name="funcionario_id_funcionario" class="form-control" required>
+                <option> Escolha </option>
+                <?php
+                    $sql_1 = "SELECT * FROM funcionario";
+                    $res_1 = $conn -> query($sql_1);
+                    $qtd_1 = $res_1 -> num_rows;
+                    if ($qtd_1 > 0){
+                        while($row_1 = $res_1 -> fetch_object()){
+                            if ($row -> funcionario_id_funcionario == $row_1 -> funcionario_id_funcionario){
+                                print "<option value='{$row_1 -> funcionario_id_funcionario}' selected> {$row_1 -> funcionario_id_funcionario} </option>";
+                            }
+                        }
+                    } else {
+                        print "<option> Não há funcionario registradas </option>";
+                    }
+                ?>
+            </select>
+        </label>
+    </div>
+
+    <div class="mb-3"> 
+        <label> Veiculo
+            <select name="modelo_id_modelo" class="form-control" required>
+                <option> Escolha </option>
+                <?php
+                    $sql_1 = "SELECT * FROM modelo";
+                    $res_1 = $conn -> query($sql_1);
+                    $qtd_1 = $res_1 -> num_rows;
+                    if ($qtd_1 > 0){
+                        while($row_1 = $res_1 -> fetch_object()){
+                            if ($row -> modelo_id_modelo == $row_1 -> modelo_id_modelo){
+                                print "<option value='{$row_1 -> modelo_id_modelo}' selected> {$row_1 -> modelo_id_modelo} </option>";
+                            }
+                        }
+                    } else {
+                        print "<option> Não há modelos registradas </option>";
+                    }
+                ?>
+            </select>
         </label>
     </div>
 

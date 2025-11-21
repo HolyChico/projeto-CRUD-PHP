@@ -1,9 +1,28 @@
 <h1> Listar Vendas </h1>
 
-<!-- id_venda	data_venda	valor_venda	cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelp  -->
+<!-- id_venda	data_venda	valor_venda	cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelo -->
 
 <?php
-    $sql = "SELECT * FROM vendas";
+    $sql = "SELECT 
+                ve.*, 
+                cli.nome_cliente, 
+                func.nome_funcionario, 
+                mo.nome_modelo, 
+                ma.nome_marca
+            FROM 
+                venda AS ve
+            INNER JOIN 
+                cliente AS cli 
+                ON ve.cliente_id_cliente = cli.id_cliente
+            INNER JOIN 
+                funcionario AS func 
+                ON ve.funcionario_id_funcionario = func.id_funcionario
+            INNER JOIN 
+                modelo AS mo 
+                ON ve.modelo_id_modelo = mo.id_modelo
+            INNER JOIN 
+                marca AS ma
+                ON mo.marca_id_marca = ma.id_marca";
 
     $res = $conn->query($sql);
 
@@ -15,19 +34,32 @@
         print"<table class='table table-bordered table-striped table-hover'>";
         print"<tr>";
         print"<th>#</th>";
-        print"<th>Nome</th>";
-        print"<th>Email</th>";
-        print"<th>Telefone</th>";
+        print"<th>Data</th>";
+        print"<th>Valor</th>";
+        print"<th>Cliente</th>";
+        print"<th>Funcionario</th>";
+        print"<th>Modelo</th>";
+        print"<th>Ações</th>";
         print"</tr>";
 
-        while($row = $res->fetch_object() ){
+         while($row = $res->fetch_object() ){
             print"<tr>";
-            print"<td>".$row->id_vendas."</td>";
-            print"<td>".$row->nome_vendas."</td>";
-            print"<td>".$row->email_vendas."</td>";
-            print"<td>".$row->telefone_vendas."</td>";
+            print"<td>".$row->id_venda."</td>";
+            print"<td>".$row->data_venda."</td>";
+            print"<td>".$row->valor_venda."</td>";
+            print"<td>".$row->cliente_id_cliente."</td>";
+            print"<td>".$row->funcionario_id_funcionario."</td>";
+            print"<td>".$row->modelo_id_modelo."</td>";
+            print"<td>
+                    <button class='btn btn-success' onclick=\" {location.href='?page=editar-vendas&id_modelo={$row->id_venda}';} \"> Editar </button>
+
+                    <button class='btn btn-danger' onclick=\"if(confirm('Tem certeza que deseja excluir?')) {location.href='?page=salvar-vendas&acao=excluir&id_venda={$row->id_venda}'; }\"> Excluir </button>
+
+                  </td>";
+            
             print"<tr>";
         }
+
         print"</table>";
     }
 
