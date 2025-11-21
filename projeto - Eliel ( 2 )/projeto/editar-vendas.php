@@ -1,28 +1,34 @@
 <h1> Editar Vendas </h1>
 
-<!-- id_venda	data_venda	valor_venda	//   cliente_id_cliente	funcionario_id_funcionario	modelo_id_modelo -->
-
 <?php
-    $sql = "SELECT * FROM venda WHERE id_venda = ".$_REQUEST ['id_venda'];
+    // CORREÇÃO 1: Evita o Erro Fatal, definindo $id_venda como 0 se não estiver na URL
+    $id_venda = (int) @$_REQUEST['id_venda']; 
+
+    $sql = "SELECT * FROM venda WHERE id_venda = " . $id_venda;
 
     $res = $conn -> query($sql);
 
-    $row = $res -> fetch_object();
+    // Proteção: Inicializa $row
+    if ($res && $res->num_rows > 0) {
+        $row = $res -> fetch_object();
+    } else {
+        $row = (object) []; 
+    }
 ?> 
 
-<form action="?page=salvar-venda" method="POST">
+<form action="?page=salvar-vendas" method="POST">
     <input type="hidden" name="acao" value="editar">
-    <input type="hidden" name="id_venda" value="<?php print $row -> id_venda ?>" >
+    <input type="hidden" name="id_venda" value="<?php print $row->id_venda ?? ''; ?>" >
 
     <div class="mb-3">
         <label> Data
-            <input type="date"  name="data_venda" class="form-control" value="<?php print $row -> data_venda; ?>">
+            <input type="date"  name="data_venda" class="form-control" value="<?php print $row->data_venda ?? ''; ?>">
         </label>
     </div>
 
     <div class="mb-3">
         <label>Valor 
-            <input type="number" name="valor_venda" class="form-control" value="<?php print $row -> valor_venda; ?> "> 
+            <input type="number" name="valor_venda" class="form-control" value="<?php print $row->valor_venda ?? ''; ?>"> 
         </label>
     </div>
 
@@ -36,12 +42,12 @@
                     $qtd_1 = $res_1 -> num_rows;
                     if ($qtd_1 > 0){
                         while($row_1 = $res_1 -> fetch_object()){
-                            if ($row -> cliente_id_cliente == $row_1 -> cliente_id_cliente){
-                                print "<option value='{$row_1 -> cliente_id_cliente}' selected> {$row_1 -> cliente_id_cliente} </option>";
-                            }
+                            // CORREÇÃO 2: Lógica de seleção correta (FK vs PK)
+                            $selected = (isset($row->cliente_id_cliente) && $row->cliente_id_cliente == $row_1->id_cliente) ? 'selected' : '';
+                            print "<option value='{$row_1->id_cliente}' {$selected}> {$row_1->nome_cliente} </option>";
                         }
                     } else {
-                        print "<option> Não há cliente registradas </option>";
+                        print "<option> Não há clientes registradas </option>";
                     }
                 ?>
             </select>
@@ -58,12 +64,12 @@
                     $qtd_1 = $res_1 -> num_rows;
                     if ($qtd_1 > 0){
                         while($row_1 = $res_1 -> fetch_object()){
-                            if ($row -> funcionario_id_funcionario == $row_1 -> funcionario_id_funcionario){
-                                print "<option value='{$row_1 -> funcionario_id_funcionario}' selected> {$row_1 -> funcionario_id_funcionario} </option>";
-                            }
+                            // CORREÇÃO 2: Lógica de seleção correta (FK vs PK)
+                            $selected = (isset($row->funcionario_id_funcionario) && $row->funcionario_id_funcionario == $row_1->id_funcionario) ? 'selected' : '';
+                            print "<option value='{$row_1->id_funcionario}' {$selected}> {$row_1->nome_funcionario} </option>";
                         }
                     } else {
-                        print "<option> Não há funcionario registradas </option>";
+                        print "<option> Não há funcionários registradas </option>";
                     }
                 ?>
             </select>
@@ -80,9 +86,9 @@
                     $qtd_1 = $res_1 -> num_rows;
                     if ($qtd_1 > 0){
                         while($row_1 = $res_1 -> fetch_object()){
-                            if ($row -> modelo_id_modelo == $row_1 -> modelo_id_modelo){
-                                print "<option value='{$row_1 -> modelo_id_modelo}' selected> {$row_1 -> modelo_id_modelo} </option>";
-                            }
+                            // CORREÇÃO 2: Lógica de seleção correta (FK vs PK)
+                            $selected = (isset($row->modelo_id_modelo) && $row->modelo_id_modelo == $row_1->id_modelo) ? 'selected' : '';
+                            print "<option value='{$row_1->id_modelo}' {$selected}> {$row_1->nome_modelo} </option>";
                         }
                     } else {
                         print "<option> Não há modelos registradas </option>";
@@ -93,7 +99,7 @@
     </div>
 
     <div>
-        <button class="submit" class="btn btn-primary"> Enviar </button>
+        <button type="submit" class="btn btn-primary"> Enviar </button>
     </div> 
 
 </form>

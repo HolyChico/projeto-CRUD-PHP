@@ -2,23 +2,17 @@
 <form action="?page=salvar-vendas" method="POST">
     <input type="hidden" name="acao" value="cadastrar">
 
-    <!-- id_venda	data_venda	valor_venda
-    cliente_id_cliente  	funcionario_id_funcionario  	modelo_id_modelp dasd a -->
-
     <div class="mb-3">
         <label> Data da Venda
             <input type="date" name="data_venda" class="form-control" required>
         </label>
-
     </div>
 
     <div class="mb-3">
         <label> Valor da venda
-            <input type="number" name="email_venda" class="form-control" required>
+            <input type="number" name="valor_venda" class="form-control" required> 
         </label>
     </div>
-
-
 
     <div class="mb-3">
         <label> Cliente 
@@ -35,11 +29,9 @@
                 else {
                         print"<option> Não há clientes registrados </option>";
                 }
-
                 ?>
             </select>
         </label>
-
     </div>
 
     <div class="mb-3">
@@ -55,13 +47,12 @@
                         print"<option value='{$row->id_funcionario}'>{$row->nome_funcionario}</option> ";
                 } }
                 else {
-                        print"<option> Não há funcionarios registradas </option>";
+                        print"<option> Não há funcionários registrados </option>";
                 }
 
                 ?>
             </select>
         </label>
-
     </div>
 
     <div class="mb-3">
@@ -83,7 +74,6 @@
                 ?>
             </select>
         </label>
-
     </div>
 
     <div class="mb-3">
