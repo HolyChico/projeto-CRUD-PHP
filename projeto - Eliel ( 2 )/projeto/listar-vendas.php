@@ -35,30 +35,22 @@
         print"<th>Data</th>";
         print"<th>Valor</th>";
         print"<th>Cliente</th>";
-        print"<th>Funcionário</th>";
+        print"<th>Funcionario</th>";
         print"<th>Modelo</th>";
-        print"<th>Marca</th>";
         print"<th>Ações</th>";
         print"</tr>";
 
          while($row = $res->fetch_object() ){
-            // Formatação de Dados para exibição
-            $data_formatada = date('d/m/Y', strtotime($row->data_venda));
-            $valor_formatado = 'R$ ' . number_format($row->valor_venda, 2, ',', '.');
-            
             print"<tr>";
             print"<td>".$row->id_venda."</td>";
-            print"<td>".$data_formatada."</td>";
-            print"<td>".$valor_formatado."</td>";
-            
-            // CORREÇÃO: Mostra os nomes obtidos via JOIN
-            print"<td>".$row->nome_cliente."</td>";
-            print"<td>".$row->nome_funcionario."</td>";
-            print"<td>".$row->nome_modelo."</td>";
-            print"<td>".$row->nome_marca."</td>";
-            
+            print"<td>".$row->data_venda."</td>";
+            print"<td>".$row->valor_venda."</td>";
+            // ERRO AQUI: Exibindo IDs em vez de nomes
+            print"<td>".$row->cliente_id_cliente."</td>";
+            print"<td>".$row->funcionario_id_funcionario."</td>";
+            print"<td>".$row->modelo_id_modelo."</td>";
             print"<td>
-                    <button class='btn btn-success' onclick=\"location.href='?page=editar-vendas&id_venda={$row->id_venda}'; \"> Editar </button>
+                    <button class='btn btn-success' onclick=\" {location.href='?page=editar-vendas&id_modelo={$row->id_venda}';} \"> Editar </button>
 
                     <button class='btn btn-danger' onclick=\"if(confirm('Tem certeza que deseja excluir?')) {location.href='?page=salvar-vendas&acao=excluir&id_venda={$row->id_venda}'; }\"> Excluir </button>
 
@@ -69,4 +61,5 @@
 
         print"</table>";
     }
+
 ?>

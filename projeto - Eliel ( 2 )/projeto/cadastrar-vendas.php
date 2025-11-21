@@ -6,13 +6,15 @@
         <label> Data da Venda
             <input type="date" name="data_venda" class="form-control" required>
         </label>
+
     </div>
 
     <div class="mb-3">
         <label> Valor da venda
-            <input type="number" name="valor_venda" class="form-control" required> 
+            <input type="number" name="email_venda" class="form-control" required> 
         </label>
     </div>
+
 
     <div class="mb-3">
         <label> Cliente 
@@ -29,9 +31,11 @@
                 else {
                         print"<option> Não há clientes registrados </option>";
                 }
+
                 ?>
             </select>
         </label>
+
     </div>
 
     <div class="mb-3">
@@ -47,12 +51,13 @@
                         print"<option value='{$row->id_funcionario}'>{$row->nome_funcionario}</option> ";
                 } }
                 else {
-                        print"<option> Não há funcionários registrados </option>";
+                        print"<option> Não há funcionarios registradas </option>";
                 }
 
                 ?>
             </select>
         </label>
+
     </div>
 
     <div class="mb-3">
@@ -74,6 +79,7 @@
                 ?>
             </select>
         </label>
+
     </div>
 
     <div class="mb-3">
