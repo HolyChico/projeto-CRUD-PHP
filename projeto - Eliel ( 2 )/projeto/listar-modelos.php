@@ -9,7 +9,6 @@
 
     $qtd = $res->num_rows;
 
-    if($qtd>0){
         print"<p> Encontrou <b>$qtd</b> resultados(s). </p>";
         print"<table class='table table-bordered table-striped table-hover'>";
         print"<tr>";
@@ -21,7 +20,7 @@
         print"<th>Tipo</th>";
         print"<th>Ações</th>";
         print"</tr>";
-
+    if($qtd>0){
         while($row = $res->fetch_object() ){
             print"<tr>";
             print"<td>".$row->id_modelo."</td>";
@@ -36,11 +35,10 @@
                     <button class='btn btn-danger' onclick=\"if(confirm('Tem certeza que deseja excluir?')) {location.href='?page=salvar-modelos&acao=excluir&id_modelo={$row->id_modelo}'; }\"> Excluir </button>
 
                   </td>";
-            
             print"<tr>";
         }
-        print"</table>";
     }
+    print"</table>";
 
 
 
